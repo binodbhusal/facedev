@@ -1,0 +1,28 @@
+<div class="max-w-5xl mx-auto mt-5">
+  <div class="bg- rounded-lg shadow-md p-5 ml-3">
+    <div class="flex items-center mb-5">
+      <div class="ml-6">
+        <%= image_tag "dummyuser.png", style: "width:130px;" %>
+      </div>
+      <div class="ml-24">
+        <h5 class="text-xl font-semibold"><%= @user.name %></h5>
+        <p class="text-gray-600"><%= @user.profile_title %></p>
+        <p class="text-gray-500"><%= @user.country %> </p>
+        <p class="text-gray-500"><%= @user.city %> </p>
+      </div>
+    </div>
+    <div class="card mb-5">
+      <div class="card-body">
+        <div class="flex justify-between mb-3">
+          <h3 class="text-lg font-semibold">About</h3>
+          <h3 class="text-lg font-semibold">User Info</h3>
+        </div>
+        <div class="flex justify-between">
+          <p><%= @user.bio %></p>
+          <!-- Replace this placeholder content with actual user info -->
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
