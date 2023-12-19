@@ -1,24 +1,21 @@
-<div class="max-w-5xl mx-auto mt-5">
-  <div class="bg- rounded-lg shadow-md p-5 ml-3">
-    <div class="flex items-center mb-5">
-      <div class="ml-6">
-        <%= image_tag "dummyuser.png", style: "width:130px;" %>
-      </div>
-      <div class="ml-24">
-        <h5 class="text-xl font-semibold"><%= @user.name %></h5>
-        <p class="text-gray-600"><%= @user.profile_title %></p>
-        <p class="text-gray-500"><%= @user.country %> </p>
-        <p class="text-gray-500"><%= @user.city %> </p>
-      </div>
-    </div>
+<div class="col-lg-10 mx-auto mt-5">
+  <%= render 'members/user_personal_details', user:@user %>
     <div class="card mb-5">
       <div class="card-body">
         <div class="flex justify-between mb-3">
           <h3 class="text-lg font-semibold">About</h3>
           <h3 class="text-lg font-semibold">User Info</h3>
         </div>
+        <% if user_signed_in? && @user == current_user%>
+        <div>
+        <%= link_to edit_user_description_path, 
+        data: { controller: "bs-modal-form" } do %>
+          <span>Edit</span>
+          <%end%>
+          <% end %>
+        </div>
         <div class="flex justify-between">
-          <p><%= @user.bio %></p>
+          <%= render 'members/user_description', user: @user %>
           <!-- Replace this placeholder content with actual user info -->
          
         </div>
