@@ -1,37 +1,33 @@
-<div class="max-w-5xl mx-auto mt-5">
-<h1 class="text-4xl font-bold mb-4">Welcome to FaceDev</h1>
+<div class="container mt-5">
+  <h1 class="text-4xl font-bold mb-4">Welcome to FaceDev</h1>
 
-<div class="bg-white shadow-md rounded-lg p-4 mb-3">
-<h4 class="text-2xl  mb-1 text-center">Find developers across the world</h4>
-<%= search_form_for @q, url:root_path do |form| %>
-<div class ="flex items-center border border-grey rounded-md">
-   <%= form.search_field :city_or_country_cont, class:"form-input", placeholder:"Search developer by country or city",
-   area:{label: "Search developer by country or city", describedby:"button-addon-2"} %>
-<%= form.submit "Search", class:"bg-black hover:bg-red text-white py-2 px-4 
-rounded-md ml-2 focus:outline-none focus:ring focus:border-blue-300", id:"button-addon-2" %>
+  <div class="bg-white shadow-md rounded-lg p-4 mb-3">
+    <h4 class="text-2xl  mb-1 text-center">Find developers across the world</h4>
+    <%= search_form_for @q, url: root_path do |form| %>
+      <div class="input-group mb-3">
+        <%= form.search_field :city_or_country_cont, class: "form-control", placeholder: "Search developer by country or city", area: { label: "Search developer by country or city", describedby: "button-addon-2" } %>
+        <button type="submit" class="btn btn-primary" id="button-addon-2">Search</button>
+      </div>
+    <% end %>
+  </div>
 
-</div>
-<% end %>
-</div>
-
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-<% @users.each do |user| %>
-<div class="mb-3 flex text-center"> 
-<div class="bg-white rounded-lg shadow-md w-full">
-<div class="p-4 flex flex-col items-center h-full"> 
-<%= image_tag "dummyuser.png", style: "width:100px; border:2px solid #2CBCE9;
- border-radius:50%"; %>
- <div class="user-info mt-4 text-center"> 
- <h5 class="text-xl font-semibold"><%= user.name %></h5>
- <p class="text-gray-600"><%= user.profile_title %></p>
- <small class="text-gray-500"><%= user.country %> </small>
- <div class="flex flex-col items-center mb-1">
- <%= link_to "View Profile", member_path(user), class: "block bg-red
- text-white py-2 px-4 mt-4 rounded-md text-center w-32" %> </div>
- </div>
-</div>
-</div>
-</div>
-<% end %>
-</div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-4 mt-5">
+    <% @users.each do |user| %>
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <%= image_tag "dummyuser.png", style: "width:100px; border:2px solid #2CBCE9; border-radius:50%"; %>
+            <div class="user-info mt-4 text-center">
+              <h5 class="text-xl font-semibold"><%= user.name %></h5>
+              <p class="text-gray-600"><%= user.profile_title %></p>
+              <small class="text-gray-500"><%= user.country %> </small>
+              <div class="d-grid mt-4">
+                <%= link_to "View Profile", member_path(user), class: "btn btn-danger text-white rounded-md text-center" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
