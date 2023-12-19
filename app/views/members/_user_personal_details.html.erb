@@ -1,0 +1,23 @@
+<div class="card mb-5"  id="user-personal-details">
+    <div class="row">
+      <div class="col-lg-4">
+        <%= image_tag "dummyuser.png", style: "width:130px;" %>
+      </div>
+      <div class="col-lg-8">
+      <div class="card-body">
+        <h5 class="text-xl font-semibold"><%= user.name %></h5>
+        <p class="text-gray-600"><%= user.profile_title %></p>
+        <p class="text-gray-500"><%= user.city %> </p>
+        <p class="text-gray-500"><%= user.country %> </p>
+        <% if user_signed_in? && user == current_user%>
+        <div>
+        <%= link_to edit_user_personal_details_path, 
+        data: { controller: "bs-modal-form" } do %>
+          <span>Edit</span>
+          <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    </div> 
+    </div>
