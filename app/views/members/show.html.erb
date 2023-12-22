@@ -16,9 +16,37 @@
         </div>
         <div class="flex justify-between">
           <%= render 'members/user_description', user: @user %>
-          <!-- Replace this placeholder content with actual user info -->
-         
         </div>
+        <div class="card mb-5">
+      <div class="card-body">
+          <% if user_signed_in? && @user == current_user %>
+          <div class="row"> 
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-start">
+          <h3> Work Experiences </h3>
+          </div>
+          </div>
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-start">
+          <%= link_to new_work_experience_path, data: { controller: "bs-modal-form" } do %>
+            <i class="bi bi-plus"></i> Add Experience
+          <% end %>
+          </div>
+          </div>
+          <% if @user.work_experiences.present? %>
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-start">
+          <%= link_to "javascript:void(0)" do %>
+            <i class= "bi bi-pencil-fill"></i> Edit Experience
+            <% end %>
+
+          </div>
+          </div>
+          <%end %>
+          <%end %>
+      </div>
+      </div>
+
       </div>
     </div>
   </div>
