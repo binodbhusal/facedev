@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   patch 'update_personal_details', to: 'members#update_personal_details', as:'update_user_personal_details'
 
   resources :work_experiences
+  resources :connections
 end
