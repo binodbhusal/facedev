@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable 
-  has_many :work_experiences
+  has_many :work_experiences, dependent: :destroy
+  has_many :connections, dependent: :destroy
          PROFILE_TITLE = [
         'Fullstack Developer',
         'Frondend Developer',
@@ -29,5 +30,10 @@ class User < ApplicationRecord
         def self.ransackable_attributes(auth_object = nil)
           ['country', 'city']
         end
-      
+        def my_connection(user)
+          Connection.where("(user_id = ? AND connected_user_id = ?) OR (user_id= ? AND connected_user_id = ?)", user.id,id, id, user.id)
+        end
+      def check_already_connected?(user)
+        self != user && !my_connection(user).present?
+      end
 end
