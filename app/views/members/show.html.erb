@@ -25,6 +25,7 @@
           <div class ="d-flex justify-content-start">
           <h3> Work Experiences </h3>
           </div>
+         
           </div>
           <div class="col-lg-4"> 
           <div class ="d-flex justify-content-start">
@@ -35,7 +36,7 @@
           </div>
           <% if @user.work_experiences.present? %>
           <div class="col-lg-4"> 
-          <div class ="d-flex justify-content-start">
+          <div class ="d-flex justify-content-end">
           <%= link_to "javascript:void(0)" do %>
             <i class= "bi bi-pencil-fill"></i> Edit Experience
             <% end %>
@@ -45,6 +46,13 @@
           <%end %>
           <%end %>
       </div>
+      <%if @user.work_experiences.present? %>
+      <ul class="list-group" id="work_experience_items">
+      <% @user.work_experiences.each do |work_experience| %>
+        <%= render 'work_experiences/work_exp', work_experience:work_experience %>
+        <%end%>
+      </ul>
+      <% end %>
       </div>
 
       </div>
