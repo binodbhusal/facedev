@@ -1,9 +1,19 @@
 class ConnectionsController < ApplicationController
     before_action :authenticate_user!
     def index 
-        @requested_connections = current_user.connections.where(user_id: current_user.id)
-        @received_connections = Connection.where(connected_user_id: current_user.id)
+        @requested_connections = Connection.includes(:requested).where(user_id: current_user.id)
+        @received_connections = Connection.includes(:received).where(connected_user_id: current_user.id)
     end
+
+    def update 
+      @connection = Connection.find(params[:id]) 
+      respond_to do |format| 
+        if @connection.update(connection_params)
+            format.turbo_stream{ render turbo_stream: turbo_stream.replace("connection-status-#{@connection.id}", partial: 'connections/update', locals: {connection: @connection}) }
+        end
+      end
+    end 
+
     def create 
         @connection = current_user.connections.new(connection_params)
         @connector = User.find(connection_params[:connected_user_id])
