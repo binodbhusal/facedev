@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   get 'edit_personal_details', to: 'members#edit_personal_details', as:'edit_user_personal_details'
   patch 'update_personal_details', to: 'members#update_personal_details', as:'update_user_personal_details'
-
+  get 'member-connections/:id', to: 'members#connections', as:'member_connections'
   resources :work_experiences
   resources :connections
 end
