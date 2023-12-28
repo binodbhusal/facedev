@@ -4,6 +4,8 @@ class MembersController < ApplicationController
     
     def show 
         @user = User.find(params[:id])
+        @connections = Connection.where('user_id= ? OR connected_user_id=?', params[:id],params[:id]).where(status:'accepted')
+        @mutual_connections = current_user.mutually_connected_ids(@user)
     end
     def edit_description; end
         def update_description
@@ -22,7 +24,16 @@ class MembersController < ApplicationController
                     end
                 end 
             end
-
+            def connections 
+              @user = User.find(params[:id])
+              @connected_user = if params[:mutual_connections].present?
+                mutualy_connected_ids = current_user.mutually_connected_ids(@user)
+              User.where(id:mutualy_connected_ids)
+              else 
+                User.where(id:@user.connected_user_ids)
+              end
+                @total_connections = @connected_user.count
+            end 
             private 
             def personal_details_params
                 params.require(:user).permit(:first_name, :last_name, :country, :city, :profile_title)
