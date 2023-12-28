@@ -1,6 +1,5 @@
 <div class="card mb-5"  id="user-personal-details">
-    <div class="row">
-    
+    <div class="row">  
       <div class="col-lg-4">
         <%= image_tag "dummyuser.png", style: "width:130px;" %>
       </div>
@@ -43,8 +42,17 @@
       <% end %>
      
        </div>
+       <div id= "connection-count">
+       <% if @connections.present? %>
+       <%=link_to pluralize(@connections.count, 'connections'), member_connections_path(user) %>
+       </div>
+       <% end %>
         <div>
-        
+        <% if current_user!= @user %>
+        <div id= "mutual-connection-count">
+        <%=link_to pluralize(@mutual_connections.count, 'mutual connections'), member_connections_path(user, mutual_connections: true) %>
+        </div>
+        <% end %>
         
         </div>
       </div>
