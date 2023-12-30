@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations' 
+  }
   root 'home#index'
   resources :members, only:[:show]
   get 'edit_description', to: 'members#edit_description', as:'edit_user_description'
