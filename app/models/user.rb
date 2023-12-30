@@ -2,9 +2,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable 
+         :recoverable, :rememberable, :validatable, :trackable, :confirmable
   has_many :work_experiences, dependent: :destroy
   has_many :connections, dependent: :destroy
+  validates :first_name, :last_name, :profile_title, presence:true
+
          PROFILE_TITLE = [
         'Fullstack Developer',
         'Frondend Developer',
@@ -22,6 +24,10 @@ class User < ApplicationRecord
 ].freeze
          def name
           "#{first_name} #{last_name}".strip
+         end
+         def address
+          return nil if city.blank? && country.blank?
+          "#{city}, #{country}"
          end
 
          def self.ransackable_associations(auth_object = nil)
