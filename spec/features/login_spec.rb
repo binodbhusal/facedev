@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "Logins", type: :feature do
-  
+RSpec.feature 'Logins', type: :feature do
   describe 'Login' do
-    let (:user){create(:user)}
+    let(:user) { create(:user) }
     it 'should Login successfuly with email and password' do
       visit root_path
       click_link 'Sign in'
