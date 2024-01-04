@@ -1,0 +1,61 @@
+<div class="col-lg-10 mx-auto mt-5">
+  <%= render 'members/user_personal_details', user:@user %>
+    <div class="card mb-5">
+      <div class="card-body">
+        <div class="flex justify-between mb-3">
+          <h3 class="text-lg font-semibold">About</h3>
+          <h3 class="text-lg font-semibold">User Info</h3>
+        </div>
+        <% if @user == current_user%>
+        <div>
+        <%= link_to edit_user_description_path, 
+        data: { controller: "bs-modal-form" } do %>
+          <span>Edit</span>
+          <%end%>
+          <% end %>
+        </div>
+        <div class="flex justify-between">
+          <%= render 'members/user_description', user: @user %>
+        </div>
+        <div class="card mb-5">
+      <div class="card-body">
+          <% if @user == current_user %>
+          <div class="row"> 
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-start">
+          <h3> Work Experiences </h3>
+          </div>
+         
+          </div>
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-start">
+          <%= link_to new_work_experience_path, data: { controller: "bs-modal-form" } do %>
+            <i class="bi bi-plus"></i> Add Experience
+          <% end %>
+          </div>
+          </div>
+          <% if @user.work_experiences.present? %>
+          <div class="col-lg-4"> 
+          <div class ="d-flex justify-content-end">
+          <%= link_to "javascript:void(0)" do %>
+            <i class= "bi bi-pencil-fill"></i> Edit Experience
+            <% end %>
+
+          </div>
+          </div>
+          <%end %>
+          <%end %>
+      </div>
+      <%if @user.work_experiences.present? %>
+      <ul class="list-group" id="work_experience_items">
+      <% @user.work_experiences.each do |work_experience| %>
+        <%= render 'work_experiences/work_exp', work_experience:work_experience %>
+        <%end%>
+      </ul>
+      <% end %>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
